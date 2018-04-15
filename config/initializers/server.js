@@ -12,6 +12,7 @@ const helmet = require('helmet');
 const errorHandler = require('../../middlewares/errorHandler');
 const logger = require('./logger').getBasicLogger('server');
 const routeMiddleware = require('../../middlewares/mainRoutes');
+const initializeDb = require('./database');
 
 module.exports.initLocalVariables = (app) => {
     dotenv.config();
