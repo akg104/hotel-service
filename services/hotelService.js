@@ -8,7 +8,11 @@ let models = require('../models');
 const dateUtil = require('../utils/dateUtil');
 const _ = require('underscore');
 
-
+/**
+ * get rooms config and its inventory
+ * @param reqData
+ * @returns {*|T}
+ */
 let getRoomsConfig = (reqData) => {
     return models.roomType.find({
         where: {
@@ -28,6 +32,11 @@ let getRoomsConfig = (reqData) => {
     });
 };
 
+/**
+ * get room inventories based on roomType
+ * @param reqData
+ * @returns {Promise.<Instance[]>}
+ */
 let getRoomsInventory = (reqData) => {
     return models.roomInventory.findAll({
         where: {
@@ -37,6 +46,12 @@ let getRoomsInventory = (reqData) => {
     });
 };
 
+/**
+ * update rooms inventory
+ * @param reqData
+ * @param roomInventoryIds
+ * @returns {Promise.<TResult>}
+ */
 let updateRoomsInventory = (reqData, roomInventoryIds) => {
     return models.roomInventory.update({
             room_price: reqData.pricePerRoom,
@@ -52,6 +67,12 @@ let updateRoomsInventory = (reqData, roomInventoryIds) => {
     });
 };
 
+/**
+ * insert room inventories for provided dates
+ * @param data
+ * @param bookingDates
+ * @returns {Promise.<Instance[]>|Promise.<Array.<Instance>>}
+ */
 let createRoomsInventory = (data, bookingDates) => {
     let dataToInsert = bookingDates.map(bookingDate => {
         return {
@@ -64,10 +85,22 @@ let createRoomsInventory = (data, bookingDates) => {
     return models.roomInventory.bulkCreate(dataToInsert);
 };
 
+/**
+ * get date range
+ * @param startDate
+ * @param endDate
+ * @param days {Array} [1-monday ... 7-sunday]
+ * @returns {Array}
+ */
 let getDatesRange = (startDate, endDate, days) => {
     return dateUtil.getDateRange(startDate, endDate, days);
 };
 
+/**
+ * return allDates - existingDates
+ * @param existingDates
+ * @param allDates
+ */
 let getDatesToAdd = (existingDates, allDates) => {
     return _.difference(allDates, existingDates);
 };
