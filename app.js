@@ -1,3 +1,4 @@
+const newRelic = require('newrelic');
 const express = require('express');
 const server = require('./config/initializers/server');
 

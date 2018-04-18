@@ -1,0 +1,13 @@
+
+[
+  {
+    "model": "room_inventory",
+    "data": {
+      "id": 2,
+      "room_type_id": 1,
+      "booking_date": "2018-05-12",
+  "room_price": 1900,
+  "available_rooms": 2,
+    }
+  }
+]

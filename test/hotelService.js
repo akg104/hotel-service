@@ -3,7 +3,6 @@
  */
 
 const expect = require('chai').expect;
-const assert = require('chai').assert;
 const hotelService = require('../services/hotelService');
 const testDb = require('./testDb');
 
@@ -17,23 +16,6 @@ describe('#getDatesRange()', () => {
         let result = hotelService.getDatesRange(a,b,c);
 
         expect(result).to.have.members(d);
-    });
-});
-
-describe('#getRoomsConfig()', () => {
-    it('should get room and its inventories', (done) => {
-        let reqData = {
-            roomCategoryId: 1,
-            from_date: '2018-04-15',
-            to_date: '2018-04-20'
-        };
-        let expected = [];
-
-        hotelService.getRoomsConfig(reqData)
-        .then(resp => {
-            expect(resp).to.be.eq(expected);
-            done();
-        }).catch(done);
     });
 });
 
@@ -52,10 +34,14 @@ describe('#getRoomsInventory()', () => {
             bookingDates: ['2018-04-15', '2018-04-16', '2018-04-18'],
             roomCategoryId: 1
         };
+
         hotelService.getRoomsInventory(reqData)
         .then(resp => {
-            expect(resp).to.have.any.keys('c');
+            expect(resp).to.be.an('array');
             done();
         }).catch(done);
+
     });
 });
+
+

@@ -21,7 +21,12 @@ let roomInventoryModel = dbMock.define('room_inventory', {
     available_rooms: 5,
     created_at: '2018-04-15 02:00:00',
     updated_at: '2018-04-15 02:00:00'
+}, {
+    tableName: 'room_inventory',
+    underscored: true,
+    freezeTableName: true,
 });
+
 
 module.exports = {
     roomTypeModel,
